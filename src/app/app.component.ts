@@ -15,43 +15,46 @@ export class AppComponent {
   title = "imasparql";
   content: any;
   constructor(private imasparql: NgImasparqlService) {
-    let dateColumn: SelectQuery = {
+    // expect query
+    // PREFIX schema: <http://schema.org/>SELECT(sample(?o) as ?date) (sample(?n) as ?name) (sample(?sub) as ?s)WHERE { ?sub schema:birthDate ?o; schema:name|schema:alternateName ?n;FILTER(regex(str(?o), "04-24" )).}group by(?n)order by(?name)
+
+    const dateColumn: SelectQuery = {
       column: "sample(?o)",
       ailas: "?date"
     };
 
-    let nameColumn: SelectQuery = {
+    const nameColumn: SelectQuery = {
       column: "sample(?n)",
       ailas: "?name"
     };
 
-    let subColumn: SelectQuery = {
+    const subColumn: SelectQuery = {
       column: "sample(?sub)",
       ailas: "?s"
     };
 
-    let groupbyQuery: GroupbyOrOrderbyQuery = {
+    const groupbyQuery: GroupbyOrOrderbyQuery = {
       query: "n"
     };
 
-    let orderbyQuery: GroupbyOrOrderbyQuery = {
+    const orderbyQuery: GroupbyOrOrderbyQuery = {
       query: "name"
     };
 
-    let selectQuery: string = this.imasparql.buildSelectQuery([
+    const selectQuery: string = this.imasparql.buildSelectQuery([
       dateColumn,
       nameColumn,
       subColumn
     ]);
 
-    let date = new Date();
-    let month = date.getMonth() + 1;
-    let day = date.getDate() + 3;
-    let now =
+    const date = new Date();
+    const month = date.getMonth() + 1;
+    const day = date.getDate() + 3;
+    const now =
       (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
 
-    let whereQuery: string = `?sub schema:birthDate ?o; schema:name|schema:alternateName ?n;`;
-    let filterQuery: string = `FILTER(regex(str(?o), "` + now + `" )).}`;
+    const whereQuery: string = `?sub schema:birthDate ?o; schema:name|schema:alternateName ?n;`;
+    const filterQuery: string = `FILTER(regex(str(?o), "` + now + `" )).}`;
 
     this.imasparql
       .get(
