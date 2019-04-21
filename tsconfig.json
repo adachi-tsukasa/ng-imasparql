@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-imasparql": [
+        "dist/ng-imasparql"
+      ],
+      "ng-imasparql/*": [
+        "dist/ng-imasparql/*"
+      ]
+    }
   }
 }

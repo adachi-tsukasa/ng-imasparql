@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "ng-imasparql": {
+      "root": "projects/ng-imasparql",
+      "sourceRoot": "projects/ng-imasparql/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-imasparql/tsconfig.lib.json",
+            "project": "projects/ng-imasparql/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-imasparql/src/test.ts",
+            "tsConfig": "projects/ng-imasparql/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-imasparql/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-imasparql/tsconfig.lib.json",
+              "projects/ng-imasparql/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "imasparql"
